@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neon Nav — Demo</title>
+  <style>
+  :root{
+    --nav-height: 70px;
+    --accent: #00eaff;
+    --accent-glow: rgba(0,234,255,0.55);
+    --bg: #0b0f19;
+    --card-bg: #111827;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Poppins", system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;height:var(--nav-height);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;z-index:1000;
+    background: rgba(15,23,42,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(0,234,255,0.12);
+    transition: background-color 260ms ease, box-shadow 260ms ease;
+  }
+  .nav.scrolled{
+    background: rgba(10,12,20,0.95);
+    box-shadow:0 8px 40px rgba(0,234,255,0.06);
+  }
+  .logo{
+    font-size:1.25rem;font-weight:700;
+    color:var(--accent);
+    text-shadow:0 0 10px var(--accent-glow);
+  }
+
+  .menu{display:flex;gap:12px;align-items:center}
+  .menu a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;transition:all 160ms ease}
+  .menu a:hover{background:rgba(0,234,255,0.06);box-shadow:0 0 10px var(--accent-glow);color:var(--accent)}
+  .menu a.active{background:var(--accent);color:#031018;box-shadow:0 6px 20px var(--accent-glow)}
+
+  .hamburger{display:none}
+  .hamburger button{background:transparent;border:0;color:var(--text);font-size:1.35rem;padding:8px;border-radius:8px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  main{padding-top:var(--nav-height)}
+  .hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:36px}
+  .hero .inner{max-width:960px}
+  .hero h1{font-size:2.4rem;margin:0 0 12px;text-shadow:0 0 18px var(--accent-glow)}
+  .hero p{color:var(--text-dim);margin:0 0 18px}
+  .hero .hero-btn{background:var(--accent);border:0;padding:12px 18px;border-radius:10px;font-weight:700;color:#001;cursor:pointer;box-shadow:0 6px 18px var(--accent-glow);transition:transform 180ms ease}
+  .hero .hero-btn:hover{transform:translateY(-4px)}
+
+  /* ---------- Sections & cards ---------- */
+  section{padding:72px 20px;max-width:1000px;margin:0 auto}
+  h2{margin:0 0 12px}
+  .card{background:var(--card-bg);padding:18px;border-radius:12px;margin-bottom:16px;border:1px solid rgba(0,234,255,0.06);box-shadow:0 6px 18px rgba(0,234,255,0.03);transition:transform 220ms ease}
+  .card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,234,255,0.06)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .menu{display:none}
+    .hamburger{display:block}
+    .mobile-menu{position:fixed;left:12px;right:12px;top:calc(var(--nav-height) + 12px);background:rgba(8,10,14,0.98);padding:12px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:8px}
+    .mobile-menu.hidden{display:none}
+  }
+
+  /* small helpers */
+  .muted{color:var(--text-dim)}
+  footer{padding:28px 20px;text-align:center;color:var(--text-dim)}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav" id="siteNav" role="navigation" aria-label="Main navigation">
+    <div class="logo">Neon Nav Demo</div>
+
+    <nav class="menu" id="menu">
+      <a href="#home" data-target="home">Home</a>
+      <a href="#about" data-target="about">About</a>
+      <a href="#services" data-target="services">Services</a>
+      <a href="#work" data-target="work">Work</a>
+      <a href="#contact" data-target="contact">Contact</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+      <button aria-expanded="false" aria-controls="mobileMenu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile menu (hidden on desktop) -->
+  <div id="mobileMenu" class="mobile-menu hidden" aria-hidden="true"></div>
+
+  <!-- PAGE CONTENT -->
+  <main>
+    <section id="home" class="hero">
+      <div class="inner">
+        <h1>Neon Tech Demo</h1>
+        <p class="muted">A demo template showing a fixed neon-style navigation with scroll & hover interactions. Replace this text with your real content.</p>
+        <button class="hero-btn" id="ctaExplore">Explore Work</button>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About (Demo)</h2>
+      <div class="card">
+        <p>This is a generic demo about section. Use it to describe the project, the tech used, and any relevant highlights. The content here is placeholder text intended to demonstrate layout and styling.</p>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Services (Demo)</h2>
+      <div class="card"><strong>Neon UI Design</strong><p class="muted">Glowing buttons, futuristic layouts, and tech-styled interfaces.</p></div>
+      <div class="card"><strong>Frontend Development</strong><p class="muted">HTML, CSS, JavaScript, animations, interactive components.</p></div>
+      <div class="card"><strong>Responsive Templates</strong><p class="muted">Mobile-friendly templates that look great on all devices.</p></div>
+    </section>
+
+    <section id="work">
+      <h2>Demo Work</h2>
+      <div class="card"><strong>Interactive Navigation</strong><p class="muted">A neon-styled nav with scroll detection and active-section highlighting.</p></div>
+      <div class="card"><strong>Mini Projects</strong><p class="muted">Portfolio items like landing pages, dashboards, and UI experiments.</p></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact (Demo)</h2>
+      <div class="card">
+        <p class="muted">This is a demo contact block. Replace with your real details when you use the template.</p>
+        <p class="muted">Email: demo@example.com · GitHub: demo-repo</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small class="muted">Neon Nav — Demo template</small>
+  </footer>
+
+  <script>
+    // Defensive DOM selection to avoid "Cannot read properties of null" errors
+    const nav = document.getElementById('siteNav');
+    const scrollThreshold = 40; // px
+
+    function onScroll(){
+      if(!nav) return;
+      if(window.scrollY > scrollThreshold){
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    // Attach scroll listener (safe: window always exists)
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    // Mobile menu toggle (guarded)
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if(hamburger && mobileMenu){
+      hamburger.addEventListener('click', ()=>{
+        const btn = hamburger.querySelector('button');
+        const expanded = btn && btn.getAttribute('aria-expanded') === 'true';
+        if(btn) btn.setAttribute('aria-expanded', String(!expanded));
+
+        if(expanded){
+          mobileMenu.classList.add('hidden');
+          mobileMenu.setAttribute('aria-hidden','true');
+        } else {
+          // populate mobile menu (clone links) if empty
+          if(!mobileMenu.querySelector('a')){
+            document.querySelectorAll('#menu a').forEach(a=>{
+              const link = a.cloneNode(true);
+              mobileMenu.appendChild(link);
+            });
+          }
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.setAttribute('aria-hidden','false');
+        }
+      });
+    } else {
+      // If elements are missing, log a helpful message for debugging.
+      console.warn('Hamburger or mobileMenu element not found — mobile menu will be disabled.');
+    }
+
+    // Active link highlighting using IntersectionObserver (guarded)
+    const sections = document.querySelectorAll('main section');
+    const menuLinks = document.querySelectorAll('#menu a');
+
+    function setActive(id){
+      if(!menuLinks) return;
+      menuLinks.forEach(a=>{
+        a.classList.toggle('active', a.dataset.target === id);
+      });
+      // mobile links update (if present)
+      if(mobileMenu){
+        mobileMenu.querySelectorAll('a').forEach(a=>{
+          a.classList.toggle('active', a.dataset.target === id);
+        });
+      }
+    }
+
+    if(sections.length && menuLinks.length){
+      const obsOptions = { root: null, rootMargin: '0px', threshold: 0.55 };
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            setActive(entry.target.id);
+          }
+        });
+      }, obsOptions);
+      sections.forEach(s=>observer.observe(s));
+    } else {
+      console.warn('Sections or menu links not found — active-section highlighting disabled.');
+    }
+
+    // Smooth scrolling for links (guarded)
+    function bindSmooth(links){
+      if(!links) return;
+      links.forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(!href || !href.startsWith('#')) return;
+          const targetId = href.replace('#','');
+          const el = document.getElementById(targetId);
+          if(el){
+            e.preventDefault();
+            const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 70;
+            const top = el.getBoundingClientRect().top + window.scrollY - navHeight + 6;
+            window.scrollTo({top, behavior:'smooth'});
+            // close mobile menu on selection
+            if(hamburger && mobileMenu){
+              const btn = hamburger.querySelector('button');
+              if(btn && btn.getAttribute('aria-expanded') === 'true') btn.click();
+            }
+          }
+        });
+      });
+    }
+
+    // bind for desktop menu
+    bindSmooth(document.querySelectorAll('#menu a'));
+    // bind for mobile menu when items are added
+    if(mobileMenu){
+      const mo = new MutationObserver(()=>{
+        bindSmooth(mobileMenu.querySelectorAll('a'));
+      });
+      mo.observe(mobileMenu, {childList:true});
+    }
+
+    // CTA button behavior (example/test case)
+    const cta = document.getElementById('ctaExplore');
+    if(cta){
+      cta.addEventListener('click', ()=>{
+        const workSection = document.getElementById('work');
+        if(workSection){
+          const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 70;
+          const top = workSection.getBoundingClientRect().top + window.scrollY - navHeight + 6;
+          window.scrollTo({top, behavior:'smooth'});
+        }
+      });
+    }
+
+    // Accessibility: close mobile menu with Escape
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && hamburger && mobileMenu){
+        const btn = hamburger.querySelector('button');
+        if(btn && btn.getAttribute('aria-expanded') === 'true') btn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
